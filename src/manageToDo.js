@@ -38,9 +38,19 @@ const toDoHandler = (function () {
     DOMModule.appendChild(container, toDoInstance);
   }
 
+  function addToDo() {
+    const taskDialog = DOMModule.querySelector("#task-form");
+    const newTaskButton = DOMModule.querySelector("#show-new-task");
+    DOMModule.addEventListener(newTaskButton, "click", () => {
+      console.log("hi");
+      taskDialog.showModal();
+    })
+  }
+
   return {
     createToDoNode,
-    appendToDoNode
+    appendToDoNode,
+    addToDo
   }
 })();
 
