@@ -1,5 +1,5 @@
 import "./styles.css"
-import { toDo, toDoHandler } from "./manageToDo.js"
+import { toDo, toDoHandler, newToDoForm } from "./manageToDo.js"
 import { mainPage } from "./homepage.js"
 
 
@@ -13,4 +13,4 @@ const toDoNode2 = toDoHandler.createToDoNode(egToDo2);
 
 toDoHandler.appendToDoNode(toDoNode2);
 
-toDoHandler.addToDo();
+toDoHandler.prepareHandlers();

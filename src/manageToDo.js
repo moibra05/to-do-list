@@ -10,6 +10,30 @@ function toDo(title, description, dueDate, priority) {
   }
 }
 
+const newToDoForm = (function () {
+  function addToDo() {
+    const taskDialog = DOMModule.querySelector("#task-form");
+    const newTaskButton = DOMModule.querySelector("#show-new-task");
+    DOMModule.addEventListener(newTaskButton, "click", () => {
+      console.log("hi");
+      taskDialog.showModal();
+    })
+  }
+
+  function cancelToDo() {
+    const taskDialog = DOMModule.querySelector("#task-form");
+    const cancelButton = DOMModule.querySelector("#cancel-to-do");
+    DOMModule.addEventListener(cancelButton, "click", () => {
+      taskDialog.close();
+    })
+  }
+
+  return {
+    addToDo,
+    cancelToDo
+  }
+})();
+
 const toDoHandler = (function () {
   function createToDoNode(toDoInstance) {
     const toDoCheckbox = DOMModule.createNode("input");
@@ -38,20 +62,17 @@ const toDoHandler = (function () {
     DOMModule.appendChild(container, toDoInstance);
   }
 
-  function addToDo() {
-    const taskDialog = DOMModule.querySelector("#task-form");
-    const newTaskButton = DOMModule.querySelector("#show-new-task");
-    DOMModule.addEventListener(newTaskButton, "click", () => {
-      console.log("hi");
-      taskDialog.showModal();
-    })
+  // Temporary solution
+  function prepareHandlers() {
+    newToDoForm.addToDo();
+    newToDoForm.cancelToDo();
   }
 
   return {
     createToDoNode,
     appendToDoNode,
-    addToDo
+    prepareHandlers,
   }
 })();
 
-export { toDo, toDoHandler }
+export { toDo, toDoHandler, newToDoForm }
