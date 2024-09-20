@@ -15,8 +15,8 @@ const DOMModule = (function () {
     parent.appendChild(child);
   }
 
-  function addClass(node, newClass){
-    node.classList.add(newClass);
+  function toggleClass(node, newClass){
+    node.classList.toggle(newClass);
   }
 
   function addEventListener(node, event, callback){
@@ -25,13 +25,18 @@ const DOMModule = (function () {
     }
   }
 
+  function setAttribute(node, attribute, value){
+    node.setAttribute(attribute, value);
+  }
+
   return {
     createNode,
     querySelector,
     updateTextContent,
     appendChild,
-    addClass,
-    addEventListener
+    toggleClass,
+    addEventListener,
+    setAttribute
   }
 })();
 
