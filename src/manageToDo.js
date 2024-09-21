@@ -10,30 +10,6 @@ function toDo(title, description, dueDate, priority) {
   }
 }
 
-const newToDoForm = (function () {
-  function addToDo() {
-    const taskDialog = DOMModule.querySelector("#task-form");
-    const newTaskButton = DOMModule.querySelector("#show-new-task");
-    DOMModule.addEventListener(newTaskButton, "click", () => {
-      console.log("hi");
-      taskDialog.showModal();
-    })
-  }
-
-  function cancelToDo() {
-    const taskDialog = DOMModule.querySelector("#task-form");
-    const cancelButton = DOMModule.querySelector("#cancel-to-do");
-    DOMModule.addEventListener(cancelButton, "click", () => {
-      taskDialog.close();
-    })
-  }
-
-  return {
-    addToDo,
-    cancelToDo
-  }
-})();
-
 const toDoHandler = (function () {
   function createToDoNode(toDoInstance) {
     const toDoCheckbox = DOMModule.createNode("input");
@@ -59,20 +35,12 @@ const toDoHandler = (function () {
 
   function appendToDoNode(toDoInstance) {
     const container = DOMModule.querySelector(".all-to-dos");
-    DOMModule.appendChild(container, toDoInstance);
-  }
-
-  // Temporary solution
-  function prepareHandlers() {
-    newToDoForm.addToDo();
-    newToDoForm.cancelToDo();
+    DOMModule.appendChild(container, createToDoNode(toDoInstance));
   }
 
   return {
-    createToDoNode,
     appendToDoNode,
-    prepareHandlers,
   }
 })();
 
-export { toDo, toDoHandler, newToDoForm }
+export { toDo, toDoHandler }
