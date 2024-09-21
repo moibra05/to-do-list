@@ -100,6 +100,7 @@ aside {
   background-color: var(--primary-colour);
   height: 100vh;
   width: 290px;
+  top: 0;
   transform: translateX(-290px);
   z-index: 2;
   transition: 350ms;
@@ -158,6 +159,15 @@ aside {
 
 
 @media screen and (min-width: 1600px) {
+  body {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    grid-template-rows: 80px 1fr;
+    min-height: 100vh;
+    grid-template-areas: 
+      "header header"
+      "sidebar main";
+  }
   .hamburger {
     display: none;
   }
@@ -165,11 +175,23 @@ aside {
     display: flex;
     align-items: center;
     justify-content: center;
+    grid-area: header;
   }
   aside {
+    position: static;
+    height: unset;
+    width: unset;
     transform: translateX(0);
+    grid-area: sidebar;
+  }
+  main {
+    grid-area: main;
+    width: 100%;
   }
   #close-sidebar-button {
     display: none;
+  }
+  #sidebar-content {
+    top: 0;
   }
 }
