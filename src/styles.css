@@ -1,15 +1,17 @@
+:root {
+  --primary-colour: lightgray;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
-
 main {
-  margin: auto;
+  margin: 40px auto;
+  padding: 10px;
   max-width: 950px;
 }
-
 button {
   padding: 10px 15px;
 }
@@ -17,12 +19,18 @@ button:hover {
   cursor: pointer;
 }
 
+header {
+  width: 100vw;
+  min-height: 60px;
+  background-color: var(--primary-colour);
+}
+
 .to-do {
   display: flex;
   gap: 20px;
   padding: 10px 30px;
   margin: 10px 0px;
-  background-color: lightgray
+  background-color: var(--primary-colour);
 }
 
 .all-to-dos {
@@ -50,16 +58,16 @@ form {
   justify-content: space-between;
   align-items: center;
 }
-.task-form-header button {
+.x-button {
   background: none;
   border: none;
   padding: 0;
   margin: 10px 15px;
   font-size: 1.2rem;
   transition: 200ms;
-  font-weight:900;
+  font-weight: 900;
 }
-.task-form-header button:hover {
+.x-button:hover {
   color: rgb(209, 0, 0);
 }
 
@@ -73,11 +81,12 @@ textarea {
 /* Sidebar Styles */
 .hamburger {
   display: block;
-  font-size: 3.5rem;
-  margin-left: 20px;
+  font-size: 3rem;
+  padding: 0px 15px;
   border: none;
   background: none;
   transition: 200ms;
+  z-index: 1;
 }
 
 .hamburger:hover {
@@ -86,13 +95,18 @@ textarea {
 
 aside {
   position: absolute;
-  background-color: lightgray;
+  background-color: var(--primary-colour);
   height: 100vh;
   width: 290px;
   transform: translateX(-290px);
-  transition: 150ms;
+  z-index: 2;
+  transition: 350ms;
 }
-
+#close-sidebar-button {
+  position: absolute;
+  right: 0;
+  font-size: 2rem;
+}
 
 
 .show {

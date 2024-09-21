@@ -23,11 +23,11 @@ export const newToDoForm = (function () {
 
   // Creates event handler to send dialog form data when "Confirm" button is clicked
   const confirmButton = DOMModule.querySelector("#confirm-new-task-form");
-  DOMModule.addEventListener(confirmButton, "click", (event) => {
+  DOMModule.addEventListener(confirmButton, "click", () => {
     const form = DOMModule.querySelector("form[method=\"dialog\"]") ;
     const formData = new FormData(form);
     const newToDoObj = Object.fromEntries(formData.entries());
-    
+
     form.reset();
     taskDialog.close();
 
