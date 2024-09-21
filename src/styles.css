@@ -19,6 +19,8 @@ button:hover {
   cursor: pointer;
 }
 
+
+
 header {
   width: 100vw;
   min-height: 60px;
@@ -107,8 +109,48 @@ aside {
   right: 0;
   font-size: 2rem;
 }
+#sidebar-content-top {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+#sidebar-content {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: min(40px, 5%);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+}
+.to-do-group-button {
+  text-align: left;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
 
 
+#projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#add-project-button {
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  transition: 300ms;
+}
+#add-project-button:hover {
+  background-color: rgb(14, 141, 19);
+  color: white;
+}
+
+/* JS Styles */
 .show {
   transform: translateX(0);
   box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.552);
@@ -119,7 +161,15 @@ aside {
   .hamburger {
     display: none;
   }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   aside {
     transform: translateX(0);
+  }
+  #close-sidebar-button {
+    display: none;
   }
 }

@@ -7,12 +7,35 @@
     <title>Document</title>
   </head>
   <body>
-    <aside><button class="x-button" id="close-sidebar-button">&#10005;</button></aside>
+    <aside>
+      <button class="x-button" id="close-sidebar-button">&#10005;</button>
+      <div id="sidebar-content">
+        <div id="sidebar-content-top">
+          <input
+            type="text"
+            class="search-bar"
+            placeholder="Search all tasks"
+          />
+          <button class="to-do-group-button">All tasks</button>
+          <button class="to-do-group-button">Today</button>
+          <button class="to-do-group-button">Scheduled</button>
+          <button class="to-do-group-button">Completed</button>
+        </div>
+        <div id="to-do-projects-section">
+          <div id="projects-header">
+            <h3>Projects</h3>
+            <button id="add-project-button">&plus; New project</button>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </aside>
     <header>
       <button class="hamburger">&#9776;</button>
     </header>
     <main>
-      <h1>Welcome back...</h1>
+      <h1 class="welcome-text">Welcome back...</h1>
+
       <h3 class="date"></h3>
       <ul class="all-to-dos">
         <dialog id="task-form">

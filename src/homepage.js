@@ -1,5 +1,6 @@
 import { DOMModule } from "./domModule";
 import { format } from "date-fns";
+import { mediaQuery } from "./mediaQueries";
 
 
 export const mainPage = (function (){
@@ -15,18 +16,27 @@ export const mainPage = (function (){
     const closeSideBarDOM = DOMModule.querySelector("#close-sidebar-button");
 
     function toggleSideBar() {
-      DOMModule.toggleClass(sideBar.sideBarDOM, "show");
+      DOMModule.toggleClass(sideBarDOM, "show");
     }
 
-    DOMModule.addEventListener(hamburgerDOM, "click", toggleSideBar)
-    DOMModule.addEventListener(closeSideBarDOM, "click", toggleSideBar)
-
-
-    return {
-      sideBarDOM
-    }
+    DOMModule.addEventListener(hamburgerDOM, "click", toggleSideBar);
+    DOMModule.addEventListener(closeSideBarDOM, "click", toggleSideBar);
   })();
 
+  // Handles header change for desktop displays
+  const desktopQuery = mediaQuery.createMediaQuery("min-width: 1600px");
+  function handleDesktopChange(e){
+    const welcomeText = DOMModule.querySelector(".welcome-text");
+    if(e.matches) {
+      const header = DOMModule.querySelector("header");
+      DOMModule.appendChild(header, welcomeText);
+    }
+    else {
+      const main = DOMModule.querySelector("main");
+      main.insertBefore(welcomeText, main.firstChild);
+    }
+  }
+  mediaQuery.createMediaQueryHandler(desktopQuery, handleDesktopChange);
 
 
 })();
