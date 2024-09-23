@@ -1,5 +1,6 @@
 import { DOMModule } from "./domModule"
 import { toDoSections } from "./toDoSections"
+import { isToday } from "date-fns";
 
 
 
@@ -46,13 +47,22 @@ const toDoHandler = (function () {
   function addToCategories(toDoObj) {
     const allToDos = toDoSections.allSections["All tasks"].tasks;
     const scheduledToDos = toDoSections.allSections["Scheduled"].tasks;
+    const todayToDos = toDoSections.allSections["Today"].tasks;
+    const completedToDos = toDoSections.allSections["Completed"].tasks;
     let currentTaskGroup = toDoSections.getTaskGroup();
+
 
     if(!allToDos.includes(toDoObj)){
       allToDos.push(toDoObj);
     }
     if(!scheduledToDos.includes(toDoObj) && toDoObj.dueDate){
       scheduledToDos.push(toDoObj);
+    }
+    if(!todayToDos.includes(toDoObj) && isToday(new Date(toDoObj.dueDate.replace(/-/g, '\/').replace(/T.+/, '')))){
+      todayToDos.push(toDoObj);
+    }
+    if(!completedToDos.includes(toDoObj) && toDoObj.isCompleted){
+      
     }
     if(currentTaskGroup != "All tasks"){
       const projectToDos = toDoSections.allSections["projects"][currentTaskGroup].tasks;

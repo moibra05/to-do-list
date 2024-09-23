@@ -11,12 +11,3 @@ import { toDoSections } from "./toDoSections"
 
 
 
-
-const egToDo = toDoHandler.toDo("finish todo list project", "complete the odin project", "today", "high");
-
-toDoHandler.appendToDoNode(egToDo);
-
-const egToDo2 = toDoHandler.toDo("finish todo list project", "complete the odin project", "today", "high");
-
-toDoHandler.appendToDoNode(egToDo2);
-

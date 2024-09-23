@@ -28,6 +28,9 @@ header {
   min-height: 60px;
   background-color: var(--primary-colour);
 }
+.date {
+  margin-bottom: 10px;
+}
 
 .to-do {
   display: flex;
@@ -163,6 +166,9 @@ aside {
   background-color: rgb(14, 141, 19);
   color: white;
 }
+
+
+
 
 
 /* JS Styles */
