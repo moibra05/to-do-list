@@ -6,15 +6,7 @@ import { newProjectHandler } from "./newProject";
 import { toDoSections } from "./toDoSections"
 
 
-function displayToDos(section) {
-  if(!toDoSections.allSections.includes(section)){
-    // Checks toDo category within the projects
-    const targetSecton = toDoSections.allSections[projects][section]
-  }
-  else {
-    const targetSection = toDoSections.allSections[section];
-  }
-}
+
 
 
 
@@ -28,4 +20,3 @@ const egToDo2 = toDoHandler.toDo("finish todo list project", "complete the odin 
 
 toDoHandler.appendToDoNode(egToDo2);
 
-console.log(toDoSections.allSections);

@@ -44,18 +44,23 @@ const toDoHandler = (function () {
   }
 
   function addToCategories(toDoObj) {
-    const allToDos = toDoSections.allSections["all"].tasks;
-    const scheduledToDos = toDoSections.allSections["scheduled"].tasks;
+    const allToDos = toDoSections.allSections["All tasks"].tasks;
+    const scheduledToDos = toDoSections.allSections["Scheduled"].tasks;
+    let currentTaskGroup = toDoSections.getTaskGroup();
+
     if(!allToDos.includes(toDoObj)){
       allToDos.push(toDoObj);
     }
-    if(toDoObj.dueDate){
+    if(!scheduledToDos.includes(toDoObj) && toDoObj.dueDate){
       scheduledToDos.push(toDoObj);
     }
-  }
-
-  function refershToDos(){
-    DOMModule.deleteAllChildren(DOMModule.querySelector(".all-to-dos"));
+    if(currentTaskGroup != "All tasks"){
+      const projectToDos = toDoSections.allSections["projects"][currentTaskGroup].tasks;
+      if(!projectToDos.includes(toDoObj)){
+        projectToDos.push(toDoObj); 
+      }
+    }
+    
   }
 
 

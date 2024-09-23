@@ -27,7 +27,7 @@ export const newProjectHandler = (function (){
       form.reset();
       taskDialog.close();
   
-      toDoSections.createProject(newProjectObj["projName"])
+      toDoSections.createProject(newProjectObj["projName"]);
     })
   
   })();

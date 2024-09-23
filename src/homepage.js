@@ -1,9 +1,12 @@
 import { DOMModule } from "./domModule";
 import { format } from "date-fns";
 import { mediaQuery } from "./mediaQueries";
+import { toDoSections } from "./toDoSections";
+import { toDoHandler } from "./manageToDo";
 
 
 export const mainPage = (function (){
+
 
   // Renders Date
   const date = DOMModule.querySelector(".date");
@@ -39,5 +42,26 @@ export const mainPage = (function (){
   mediaQuery.createMediaQueryHandler(desktopQuery, handleDesktopChange);
 
 
+  function refershToDos(){
+    DOMModule.deleteAllChildren(".all-to-dos");
+  }
+
+  function displayToDos(section) {
+    refershToDos();
+    if(toDoSections.allSections[section] === undefined){
+      // Checks toDo category within the projects
+      var targetSection = toDoSections.allSections["projects"][section];
+    }
+    else {
+      var targetSection = toDoSections.allSections[section];
+    }
+    for(const task of targetSection.tasks){
+      toDoHandler.appendToDoNode(task);
+    }
+  }
+
+  return {
+    displayToDos,
+  }
 })();
 
