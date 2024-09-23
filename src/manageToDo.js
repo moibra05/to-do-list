@@ -44,16 +44,21 @@ const toDoHandler = (function () {
   }
 
   function addToCategories(toDoObj) {
-    const allToDos = toDoSections.allSections["all"].tasks
+    const allToDos = toDoSections.allSections["all"].tasks;
+    const scheduledToDos = toDoSections.allSections["scheduled"].tasks;
     if(!allToDos.includes(toDoObj)){
       allToDos.push(toDoObj);
-
+    }
+    if(toDoObj.dueDate){
+      scheduledToDos.push(toDoObj);
     }
   }
 
-  // function refershToDos(){
-  //   DOMModule.deleteAllChildren(DOMModule.querySelector());
-  // }
+  function refershToDos(){
+    DOMModule.deleteAllChildren(DOMModule.querySelector(".all-to-dos"));
+  }
+
+
 
   return {
     toDo,

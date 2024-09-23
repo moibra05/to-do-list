@@ -18,7 +18,9 @@ button {
 button:hover {
   cursor: pointer;
 }
-
+hr {
+  margin-bottom: 10px;
+}
 
 
 header {
@@ -117,7 +119,7 @@ aside {
   right: 0;
   font-size: 2rem;
 }
-#sidebar-content-top {
+#sidebar-content-top, #all-projects {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -143,6 +145,7 @@ aside {
   background-color: gray;
 }
 
+/* Projects Styles */
 #projects-header {
   display: flex;
   justify-content: space-between;
@@ -160,6 +163,7 @@ aside {
   background-color: rgb(14, 141, 19);
   color: white;
 }
+
 
 /* JS Styles */
 .show {
@@ -193,6 +197,7 @@ aside {
     width: unset;
     transform: translateX(0);
     grid-area: sidebar;
+    box-shadow: none !important;
   }
   main {
     grid-area: main;

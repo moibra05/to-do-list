@@ -18,9 +18,19 @@ export const toDoSections = (function () {
     projects: []
   };
 
+  function createProjectDOM(name) {
+    const newProjectButton = DOMModule.createNode("button");
+    const allProjectsDOM = DOMModule.querySelector("#all-projects");
+    console.log("hi");
+    DOMModule.updateTextContent(newProjectButton, name);
+    DOMModule.toggleClass(newProjectButton, "to-do-group-button");
+    DOMModule.appendChild(allProjectsDOM, newProjectButton);
+  }
+
   function createProject(name){
     const newProject = taskGroupConstructor(name);
     allSections.projects.push(newProject);
+    createProjectDOM(name);
   }
 
   return {

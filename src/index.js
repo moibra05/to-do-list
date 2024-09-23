@@ -2,7 +2,7 @@ import "./styles.css"
 import { toDoHandler } from "./manageToDo"
 import { mainPage } from "./homepage"
 import { newToDoForm } from "./newToDo";
-// import { newProjectHandler } from "./newProject";
+import { newProjectHandler } from "./newProject";
 import { toDoSections } from "./toDoSections"
 
 
@@ -28,3 +28,4 @@ const egToDo2 = toDoHandler.toDo("finish todo list project", "complete the odin 
 
 toDoHandler.appendToDoNode(egToDo2);
 
+console.log(toDoSections.allSections);
