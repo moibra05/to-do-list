@@ -29,6 +29,13 @@ const DOMModule = (function () {
     node.setAttribute(attribute, value);
   }
 
+  function deleteAllChildren(parent){
+    const element = querySelector(parent);
+    while(element.firstChild) {
+      element.firstChild.remove();
+    }
+  }
+
   return {
     createNode,
     querySelector,
@@ -36,7 +43,8 @@ const DOMModule = (function () {
     appendChild,
     toggleClass,
     addEventListener,
-    setAttribute
+    setAttribute,
+    deleteAllChildren
   }
 })();
 

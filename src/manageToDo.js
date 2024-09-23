@@ -1,16 +1,20 @@
-import { DOMModule } from "./domModule.js"
+import { DOMModule } from "./domModule"
+import { toDoSections } from "./toDoSections"
 
 
-function toDo(title, description, dueDate, priority) {
-  return {
-    title, 
-    description, 
-    dueDate, 
-    priority,
-  }
-}
 
 const toDoHandler = (function () {
+
+  function toDo(title, description, dueDate, priority, isCompleted = false) {
+    return {
+      title, 
+      description, 
+      dueDate, 
+      priority,
+      isCompleted
+    }
+  }
+
   function createToDoNode(toDoInstance) {
     const toDoCheckbox = DOMModule.createNode("input");
     const toDoNode = DOMModule.createNode("li");
@@ -36,11 +40,25 @@ const toDoHandler = (function () {
   function appendToDoNode(toDoInstance) {
     const container = DOMModule.querySelector(".all-to-dos");
     DOMModule.appendChild(container, createToDoNode(toDoInstance));
+    addToCategories(toDoInstance);
   }
 
+  function addToCategories(toDoObj) {
+    const allToDos = toDoSections.allSections["all"].tasks
+    if(!allToDos.includes(toDoObj)){
+      allToDos.push(toDoObj);
+
+    }
+  }
+
+  // function refershToDos(){
+  //   DOMModule.deleteAllChildren(DOMModule.querySelector());
+  // }
+
   return {
+    toDo,
     appendToDoNode,
   }
 })();
 
-export { toDo, toDoHandler }
+export { toDoHandler }

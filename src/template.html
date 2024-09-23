@@ -27,7 +27,26 @@
         <div id="to-do-projects-section">
           <div id="projects-header">
             <h3>Projects</h3>
-            <button id="add-project-button">&plus; New project</button>
+            <dialog id="project-form">
+              <form method="dialog" id="project-form-data">
+                <div class="task-form-header">
+                  <h2>New Project</h2>
+                  <button class="x-button" id="cancel-project">&#10005;</button>
+                </div>
+                <label for="projName">Name:</label>
+                <input
+                  type="text"
+                  name="projName"
+                  id="projName"
+                  placeholder="To-Do List"
+                  required
+                />
+                <button type="submit" id="confirm-new-project-form">
+                  Confirm
+                </button>
+              </form>
+            </dialog>
+            <button id="show-new-project">&plus; New project</button>
           </div>
           <hr />
         </div>
@@ -35,48 +54,46 @@
     </aside>
     <main>
       <h1 class="welcome-text">Welcome back...</h1>
-
       <h3 class="date"></h3>
-      <ul class="all-to-dos">
-        <dialog id="task-form">
-          <form method="dialog">
-            <div class="task-form-header">
-              <h2>New Task</h2>
-              <button class="x-button" id="cancel-to-do">&#10005;</button>
-            </div>
-            <label for="title">Title:</label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              placeholder="Finsh homework"
-              required
-            />
+      <ul class="all-to-dos"></ul>
+      <dialog id="task-form">
+        <form method="dialog" id="task-form-data">
+          <div class="task-form-header">
+            <h2>New Task</h2>
+            <button class="x-button" id="cancel-to-do">&#10005;</button>
+          </div>
+          <label for="title">Title:</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Finsh homework"
+            required
+          />
 
-            <label for="due-date">Due Date:</label>
-            <input type="date" name="due-date" id="due-date" />
+          <label for="due-date">Due Date:</label>
+          <input type="date" name="due-date" id="due-date" />
 
-            <label for="priority">Priority:</label>
-            <select name="priority" id="priority">
-              <option value=""></option>
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
+          <label for="priority">Priority:</label>
+          <select name="priority" id="priority">
+            <option value=""></option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
 
-            <label for="description">Description:</label>
-            <textarea
-              name="description"
-              id="description"
-              cols="30"
-              rows="10"
-            ></textarea>
+          <label for="description">Description:</label>
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="10"
+          ></textarea>
 
-            <button type="submit" id="confirm-new-task-form">Confirm</button>
-          </form>
-        </dialog>
-        <button id="show-new-task">Add Task</button>
-      </ul>
+          <button type="submit" id="confirm-new-task-form">Confirm</button>
+        </form>
+      </dialog>
+      <button id="show-new-task">Add Task</button>
     </main>
   </body>
 </html>

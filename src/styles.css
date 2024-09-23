@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 main {
   margin: 40px auto;
@@ -33,6 +33,7 @@ header {
   padding: 10px 30px;
   margin: 10px 0px;
   background-color: var(--primary-colour);
+  border-radius: 10px;
 }
 
 .all-to-dos {
@@ -40,7 +41,13 @@ header {
   display: flex;
   flex-direction: column-reverse;
 }
-
+#show-new-task {
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 300ms;
+  width: 100%;
+}
 
 /* New Task Dialog */
 dialog {
@@ -130,8 +137,11 @@ aside {
   border: none;
   border-radius: 5px;
   font-size: 1.1rem;
+  transition: 300ms;
 }
-
+.to-do-group-button:hover {
+  background-color: gray;
+}
 
 #projects-header {
   display: flex;
@@ -139,14 +149,14 @@ aside {
   align-items: center;
   margin-bottom: 10px;
 }
-#add-project-button {
+#show-new-project {
   font-size: 0.9rem;
   padding: 5px 10px;
   border-radius: 5px;
   border: none;
   transition: 300ms;
 }
-#add-project-button:hover {
+#show-new-project:hover, #show-new-task:hover {
   background-color: rgb(14, 141, 19);
   color: white;
 }

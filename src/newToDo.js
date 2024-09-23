@@ -1,5 +1,5 @@
 import { DOMModule } from "./domModule";
-import { toDo, toDoHandler } from "./manageToDo";
+import { toDoHandler } from "./manageToDo";
 
 
 
@@ -24,14 +24,14 @@ export const newToDoForm = (function () {
   // Creates event handler to send dialog form data when "Confirm" button is clicked
   const confirmButton = DOMModule.querySelector("#confirm-new-task-form");
   DOMModule.addEventListener(confirmButton, "click", () => {
-    const form = DOMModule.querySelector("form[method=\"dialog\"]") ;
+    const form = DOMModule.querySelector("#task-form-data") ;
     const formData = new FormData(form);
     const newToDoObj = Object.fromEntries(formData.entries());
 
     form.reset();
     taskDialog.close();
 
-    const newToDo = toDo(newToDoObj["title"], newToDoObj["description"], newToDoObj["due-date"], newToDoObj["priority"]);
+    const newToDo = toDoHandler.toDo(newToDoObj["title"], newToDoObj["description"], newToDoObj["due-date"], newToDoObj["priority"]);
     toDoHandler.appendToDoNode(newToDo);
   })
 
