@@ -4,6 +4,7 @@ import { mainPage } from "./homepage";
 
 export const toDoSections = (function () {
   let currentTaskGroup = "All tasks";
+  let displayTaskGroup = currentTaskGroup;
 
   function taskGroupConstructor(name) {
     const tasks = [];
@@ -39,14 +40,22 @@ export const toDoSections = (function () {
 
   function changeTaskGroup(event) {
     if(event.target.classList.contains("to-do-group-button")){
-      if(allSections["projects"][event.target.textContent]){
-        currentTaskGroup = event.target.textContent;
+      const toDoSection = event.target.textContent;
+      displayTaskGroup = toDoSection;
+      displaySectionHeaderText();
+      if(allSections["projects"][toDoSection]){
+        currentTaskGroup = toDoSection;
       }
       else {
         currentTaskGroup = "All tasks"
       }
-      mainPage.displayToDos(event.target.textContent);
+      mainPage.displayToDos(toDoSection);
     }
+  }
+
+  function displaySectionHeaderText() {
+    const sectionTitleDOM = DOMModule.querySelector("#todo-section-title");
+    sectionTitleDOM.textContent = displayTaskGroup;
   }
 
   // Using event bubbling on the sidebar to determine which button was pressed
