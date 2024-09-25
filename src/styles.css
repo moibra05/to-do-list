@@ -46,6 +46,18 @@ header {
   border-radius: 10px;
   border-left: 8px solid;
 }
+.high-priority {
+  border-left: 8px solid red;
+}
+.mid-priority {
+  border-left: 8px solid rgb(255, 196, 0);
+}
+.low-priority {
+  border-left: 8px solid green;
+}
+.to-do div h2{
+  margin-bottom: 10px;
+}
 .show-task-info {
   border-radius: 50%;
   border: none;

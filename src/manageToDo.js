@@ -29,19 +29,39 @@ const toDoHandler = (function () {
     const toDoCheckbox = DOMModule.createNode("input");
     const toDoNode = DOMModule.createNode("li");
     const toDoTitle = DOMModule.createNode("h2");
+    const toDoTextContainer = DOMModule.createNode("div");
     const infoButton = DOMModule.createNode("button");
-    
+    const toDoDescription = DOMModule.createNode("p");
+    const toDoDueDate = DOMModule.createNode("p");
+    const priority = toDoInstance.priority;
+
     DOMModule.setAttribute(toDoCheckbox, "type", "checkbox");
     DOMModule.toggleClass(toDoNode, "to-do");
     DOMModule.toggleClass(infoButton, "show-task-info");
     DOMModule.setAttribute(infoButton, "id", `show-task-${toDoInstance.id}-info`)
 
     DOMModule.updateTextContent(toDoTitle, toDoInstance.title);
+    DOMModule.updateTextContent(toDoDescription, toDoInstance.description);
+    DOMModule.updateTextContent(toDoDueDate, toDoInstance.dueDate);
+
     DOMModule.updateTextContent(infoButton, "i");
 
+    DOMModule.appendChild(toDoTextContainer, toDoTitle);
+    DOMModule.appendChild(toDoTextContainer, toDoDescription);
+    DOMModule.appendChild(toDoTextContainer, toDoDueDate);
     DOMModule.appendChild(toDoNode, toDoCheckbox);
-    DOMModule.appendChild(toDoNode, toDoTitle);
+    DOMModule.appendChild(toDoNode, toDoTextContainer);
     DOMModule.appendChild(toDoNode, infoButton);
+
+    if(priority === "High"){
+      DOMModule.toggleClass(toDoNode, "high-priority");
+    }
+    else if(priority === "Medium"){
+      DOMModule.toggleClass(toDoNode, "mid-priority");
+    }
+    else if(priority === "Low"){
+      DOMModule.toggleClass(toDoNode, "low-priority");
+    }
 
     return toDoNode;
   }
