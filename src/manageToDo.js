@@ -20,47 +20,59 @@ const toDoHandler = (function () {
       description, 
       dueDate, 
       priority,
-      isCompleted
+      isCompleted,
+      id: Date.now(),
     }
   }
 
   function createToDoNode(toDoInstance) {
     const toDoCheckbox = DOMModule.createNode("input");
     const toDoNode = DOMModule.createNode("li");
-    const toDoTextContainer = DOMModule.createNode("div");
     const toDoTitle = DOMModule.createNode("h2");
-    const toDoDescription = DOMModule.createNode("p");
     const infoButton = DOMModule.createNode("button");
     
     DOMModule.setAttribute(toDoCheckbox, "type", "checkbox");
     DOMModule.toggleClass(toDoNode, "to-do");
-    DOMModule.toggleClass(infoButton, "task-info-button");
+    DOMModule.toggleClass(infoButton, "show-task-info");
+    DOMModule.setAttribute(infoButton, "id", `show-task-${toDoInstance.id}-info`)
 
     DOMModule.updateTextContent(toDoTitle, toDoInstance.title);
-    DOMModule.updateTextContent(toDoDescription, toDoInstance.description);
     DOMModule.updateTextContent(infoButton, "i");
 
-    DOMModule.appendChild(toDoTextContainer, toDoTitle);
-    DOMModule.appendChild(toDoTextContainer, toDoDescription);
-
     DOMModule.appendChild(toDoNode, toDoCheckbox);
-    DOMModule.appendChild(toDoNode, toDoTextContainer);
+    DOMModule.appendChild(toDoNode, toDoTitle);
     DOMModule.appendChild(toDoNode, infoButton);
-
-    createToDoInfoDialog();
 
     return toDoNode;
   }
 
-  function createToDoInfoDialog() {
+  function createToDoInfoDialog(container, toDoInstance) {
+    const taskInfoDialogHeader = DOMModule.createNode("div");
+    const toDoTitle = container.children[1].cloneNode(true);
     const taskInfoDialog = DOMModule.createNode("dialog");
+    const closeDialogButton = DOMModule.createNode("button");
 
-    dialogHandler.initEventHandlers()
+    DOMModule.updateTextContent(closeDialogButton, "✕");
+
+    DOMModule.setAttribute(taskInfoDialogHeader, "class", "task-form-header");
+    DOMModule.setAttribute(taskInfoDialog, "id", `task-${toDoInstance.id}-info`);
+    DOMModule.setAttribute(closeDialogButton, "id", `cancel-task-${toDoInstance.id}-info`);
+
+    DOMModule.toggleClass(closeDialogButton, "x-button");
+
+    DOMModule.appendChild(taskInfoDialogHeader, toDoTitle);
+    DOMModule.appendChild(taskInfoDialogHeader, closeDialogButton);
+    DOMModule.appendChild(taskInfoDialog, taskInfoDialogHeader);
+    DOMModule.appendChild(container, taskInfoDialog);
+
+    dialogHandler.initEventHandlers(`task-${toDoInstance.id}-info`);
   }
 
   function appendToDoNode(toDoInstance) {
+    const toDoNode = createToDoNode(toDoInstance);
     const container = DOMModule.querySelector(".all-to-dos");
-    DOMModule.appendChild(container, createToDoNode(toDoInstance));
+    DOMModule.appendChild(container, toDoNode);
+    createToDoInfoDialog(toDoNode, toDoInstance);
     addToCategories(toDoInstance);
   }
 

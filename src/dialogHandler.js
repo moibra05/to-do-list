@@ -6,8 +6,8 @@ export const dialogHandler = (function (){
     const dialog = DOMModule.querySelector(`#${name}`);
 
     // Creates event handler to open dialog when the appropiate button is clicked
-    const newTaskButton = DOMModule.querySelector(`#show-${name}`);
-    DOMModule.addEventListener(newTaskButton, "click", () => {
+    const openDialogButton = DOMModule.querySelector(`#show-${name}`);
+    DOMModule.addEventListener(openDialogButton, "click", () => {
       dialog.showModal();
     })
 

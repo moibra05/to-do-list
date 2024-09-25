@@ -46,7 +46,7 @@ header {
   border-radius: 10px;
   border-left: 8px solid;
 }
-.task-info-button {
+.show-task-info {
   border-radius: 50%;
   border: none;
   font-size: 1.2rem;
@@ -59,7 +59,7 @@ header {
   margin: auto 0 auto auto;
   transition: 80ms;
 }
-.task-info-button:hover {
+.show-task-info:hover {
   outline: 2.5px solid white;
 }
 
