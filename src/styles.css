@@ -35,6 +35,8 @@ header {
   margin-bottom: 10px;
 }
 
+
+/* To-Do Styles */
 .to-do {
   display: flex;
   gap: 20px;
@@ -42,6 +44,23 @@ header {
   margin: 10px 0px;
   background-color: var(--primary-colour);
   border-radius: 10px;
+  border-left: 8px solid;
+}
+.task-info-button {
+  border-radius: 50%;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0;
+  font-weight: bolder;
+  width: 30px;
+  height: 30px;
+  color: white;
+  background-color: #2a75bc;
+  margin: auto 0 auto auto;
+  transition: 80ms;
+}
+.task-info-button:hover {
+  outline: 2.5px solid white;
 }
 
 .all-to-dos {

@@ -3,9 +3,7 @@ import { DOMModule } from "./domModule";
 export const dialogHandler = (function (){
 
   function initEventHandlers(name, submitFunction = null) {
-    console.log(name);
     const dialog = DOMModule.querySelector(`#${name}`);
-    console.log(dialog);
 
     // Creates event handler to open dialog when the appropiate button is clicked
     const newTaskButton = DOMModule.querySelector(`#show-${name}`);

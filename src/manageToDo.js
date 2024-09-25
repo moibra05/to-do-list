@@ -30,20 +30,32 @@ const toDoHandler = (function () {
     const toDoTextContainer = DOMModule.createNode("div");
     const toDoTitle = DOMModule.createNode("h2");
     const toDoDescription = DOMModule.createNode("p");
+    const infoButton = DOMModule.createNode("button");
     
     DOMModule.setAttribute(toDoCheckbox, "type", "checkbox");
     DOMModule.toggleClass(toDoNode, "to-do");
+    DOMModule.toggleClass(infoButton, "task-info-button");
 
     DOMModule.updateTextContent(toDoTitle, toDoInstance.title);
     DOMModule.updateTextContent(toDoDescription, toDoInstance.description);
+    DOMModule.updateTextContent(infoButton, "i");
 
     DOMModule.appendChild(toDoTextContainer, toDoTitle);
     DOMModule.appendChild(toDoTextContainer, toDoDescription);
 
     DOMModule.appendChild(toDoNode, toDoCheckbox);
     DOMModule.appendChild(toDoNode, toDoTextContainer);
+    DOMModule.appendChild(toDoNode, infoButton);
+
+    createToDoInfoDialog();
 
     return toDoNode;
+  }
+
+  function createToDoInfoDialog() {
+    const taskInfoDialog = DOMModule.createNode("dialog");
+
+    dialogHandler.initEventHandlers()
   }
 
   function appendToDoNode(toDoInstance) {
