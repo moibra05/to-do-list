@@ -1,10 +1,18 @@
 import { DOMModule } from "./domModule"
 import { toDoSections } from "./toDoSections"
 import { isToday } from "date-fns";
+import { dialogHandler } from "./dialogHandler";
 
 
 
 const toDoHandler = (function () {
+  dialogHandler.initEventHandlers("new-task-form", newTaskConfirm);
+
+  function newTaskConfirm(formData) {
+    const newToDoObj = Object.fromEntries(formData.entries());
+    const newToDo = toDo(newToDoObj["title"], newToDoObj["description"], newToDoObj["due-date"], newToDoObj["priority"]);
+    appendToDoNode(newToDo);
+  }
 
   function toDo(title, description, dueDate, priority, isCompleted = false) {
     return {

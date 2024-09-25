@@ -27,11 +27,13 @@
         <div id="to-do-projects-section">
           <div id="projects-header">
             <h3>Projects</h3>
-            <dialog id="project-form">
-              <form method="dialog" id="project-form-data">
+            <dialog id="new-project-form">
+              <form method="dialog" id="new-project-form-data">
                 <div class="task-form-header">
                   <h2>New Project</h2>
-                  <button class="x-button" id="cancel-project">&#10005;</button>
+                  <button class="x-button" id="cancel-new-project-form">
+                    &#10005;
+                  </button>
                 </div>
                 <label for="projName">Name:</label>
                 <input
@@ -46,7 +48,7 @@
                 </button>
               </form>
             </dialog>
-            <button id="show-new-project">&plus; New project</button>
+            <button id="show-new-project-form">&plus; New project</button>
           </div>
           <hr />
           <div id="all-projects"></div>
@@ -69,11 +71,11 @@
           </div>
         </li>
       </ul>
-      <dialog id="task-form">
-        <form method="dialog" id="task-form-data">
+      <dialog id="new-task-form">
+        <form method="dialog" id="new-task-form-data">
           <div class="task-form-header">
             <h2>New Task</h2>
-            <button class="x-button" id="cancel-to-do">&#10005;</button>
+            <button class="x-button" id="cancel-new-task-form">&#10005;</button>
           </div>
           <label for="title">Title:</label>
           <input
@@ -106,7 +108,7 @@
           <button type="submit" id="confirm-new-task-form">Confirm</button>
         </form>
       </dialog>
-      <button id="show-new-task">Add Task</button>
+      <button id="show-new-task-form">Add Task</button>
     </main>
   </body>
 </html>

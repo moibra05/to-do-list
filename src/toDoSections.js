@@ -1,10 +1,17 @@
 import { DOMModule } from "./domModule";
 import { mainPage } from "./homepage";
+import { dialogHandler } from "./dialogHandler";
 
 
 export const toDoSections = (function () {
   let currentTaskGroup = "All tasks";
   let displayTaskGroup = currentTaskGroup;
+  dialogHandler.initEventHandlers("new-project-form", newProjectConfirm);
+
+  function newProjectConfirm(formData) {
+    const newProjectObj = Object.fromEntries(formData.entries());
+    createProject(newProjectObj["projName"]);
+  }
 
   function taskGroupConstructor(name) {
     const tasks = [];
