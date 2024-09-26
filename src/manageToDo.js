@@ -35,10 +35,13 @@ const toDoHandler = (function () {
     const toDoDueDate = DOMModule.createNode("p");
     const priority = toDoInstance.priority;
 
+    if(toDoInstance.isCompleted)
+      toDoCheckbox.checked = true;
+
     DOMModule.toggleClass(toDoNode, "to-do");
     DOMModule.toggleClass(infoButton, "show-task-info");
     DOMModule.setAttribute(toDoCheckbox, "type", "checkbox");
-    DOMModule.setAttribute(toDoCheckbox, "id", `checkbox-${toDoInstance.id}`)
+    DOMModule.setAttribute(toDoCheckbox, "id", `${toDoInstance.id}-checkbox`)
     DOMModule.setAttribute(infoButton, "id", `show-task-${toDoInstance.id}-info`)
 
     DOMModule.updateTextContent(toDoTitle, toDoInstance.title);
@@ -53,9 +56,8 @@ const toDoHandler = (function () {
     DOMModule.appendChild(toDoNode, toDoTextContainer);
     DOMModule.appendChild(toDoNode, infoButton);
 
-    DOMModule.addEventListener(toDoCheckbox, "click", (e) => markTaskCompleted(e));
-    DOMModule.toggleClass(toDoNode, priority);
-
+    if(priority != "")
+      DOMModule.toggleClass(toDoNode, toDoInstance.priority);
 
     return toDoNode;
   }
@@ -91,10 +93,12 @@ const toDoHandler = (function () {
   }
 
 
-  function markTaskCompleted(event) {
-    if(event.target.checked){
-      console.log(event.target);
-    }
+  function markTaskCompleted(target) {
+    const id = parseInt(target.id);
+    const targetObj = toDoSections.allSections["All tasks"]["tasks"].filter((obj) => { return obj.id == id })[0];
+    targetObj.isCompleted = !targetObj.isCompleted
+    console.log(targetObj);
+    addToCategories(targetObj);
   }
 
   function addToCategories(toDoObj) {
@@ -117,16 +121,27 @@ const toDoHandler = (function () {
     if(!completedToDos.includes(toDoObj) && toDoObj.isCompleted){
       completedToDos.push(toDoObj);
     }
+    if(completedToDos.includes(toDoObj) && !toDoObj.isCompleted){
+      const index = completedToDos.indexOf(toDoObj);
+      completedToDos.splice(index, 1);
+    }
     if(currentTaskGroup != "All tasks"){
       const projectToDos = toDoSections.allSections["projects"][currentTaskGroup].tasks;
       if(!projectToDos.includes(toDoObj)){
         projectToDos.push(toDoObj); 
       }
     }
-    
   }
 
-
+  // Creates click handler for all to-dos
+  const allToDos = DOMModule.querySelector(".all-to-dos");
+  DOMModule.addEventListener(allToDos, "click", (e) => handleTaskClicks(e));
+  
+  function handleTaskClicks(event) {
+    if(event.target.type === "checkbox"){
+      markTaskCompleted(event.target);
+    }
+  }
 
   return {
     toDo,
