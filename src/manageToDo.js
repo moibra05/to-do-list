@@ -35,15 +35,15 @@ const toDoHandler = (function () {
     const toDoDueDate = DOMModule.createNode("p");
     const priority = toDoInstance.priority;
 
-    DOMModule.setAttribute(toDoCheckbox, "type", "checkbox");
     DOMModule.toggleClass(toDoNode, "to-do");
     DOMModule.toggleClass(infoButton, "show-task-info");
+    DOMModule.setAttribute(toDoCheckbox, "type", "checkbox");
+    DOMModule.setAttribute(toDoCheckbox, "id", `checkbox-${toDoInstance.id}`)
     DOMModule.setAttribute(infoButton, "id", `show-task-${toDoInstance.id}-info`)
 
     DOMModule.updateTextContent(toDoTitle, toDoInstance.title);
     DOMModule.updateTextContent(toDoDescription, toDoInstance.description);
     DOMModule.updateTextContent(toDoDueDate, toDoInstance.dueDate);
-
     DOMModule.updateTextContent(infoButton, "i");
 
     DOMModule.appendChild(toDoTextContainer, toDoTitle);
@@ -53,15 +53,9 @@ const toDoHandler = (function () {
     DOMModule.appendChild(toDoNode, toDoTextContainer);
     DOMModule.appendChild(toDoNode, infoButton);
 
-    if(priority === "High"){
-      DOMModule.toggleClass(toDoNode, "high-priority");
-    }
-    else if(priority === "Medium"){
-      DOMModule.toggleClass(toDoNode, "mid-priority");
-    }
-    else if(priority === "Low"){
-      DOMModule.toggleClass(toDoNode, "low-priority");
-    }
+    DOMModule.addEventListener(toDoCheckbox, "click", (e) => markTaskCompleted(e));
+    DOMModule.toggleClass(toDoNode, priority);
+
 
     return toDoNode;
   }
@@ -96,6 +90,13 @@ const toDoHandler = (function () {
     addToCategories(toDoInstance);
   }
 
+
+  function markTaskCompleted(event) {
+    if(event.target.checked){
+      console.log(event.target);
+    }
+  }
+
   function addToCategories(toDoObj) {
     const allToDos = toDoSections.allSections["All tasks"].tasks;
     const scheduledToDos = toDoSections.allSections["Scheduled"].tasks;
@@ -114,7 +115,7 @@ const toDoHandler = (function () {
       todayToDos.push(toDoObj);
     }
     if(!completedToDos.includes(toDoObj) && toDoObj.isCompleted){
-      
+      completedToDos.push(toDoObj);
     }
     if(currentTaskGroup != "All tasks"){
       const projectToDos = toDoSections.allSections["projects"][currentTaskGroup].tasks;
