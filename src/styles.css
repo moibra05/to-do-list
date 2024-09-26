@@ -1,5 +1,9 @@
 :root {
   --primary-colour: lightgray;
+
+  --checkbox-border-color: #646464;
+  --checkbox-checked-color: #274c77;
+  --checkbox-hover-color: #add5f6;
 }
 * {
   margin: 0;
@@ -39,6 +43,7 @@ header {
 /* To-Do Styles */
 .to-do {
   display: flex;
+  align-items: center;
   gap: 20px;
   padding: 10px 30px;
   margin: 10px 0px;
@@ -74,6 +79,32 @@ header {
 .show-task-info:hover {
   outline: 2.5px solid white;
 }
+
+input[type="checkbox"] {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  padding: 9px;
+  border: 2px solid var(--checkbox-border-color);
+  appearance: none;
+  background-color: transparent;
+  outline: none;
+  border-radius: 3px;
+  transition: outline 0.1s;
+}
+input[type="checkbox"]:checked {
+  background-size: cover;
+  border-color: var(--checkbox-checked-color);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 32 32" xml:space="preserve"><path style="fill: %23274c77" d="M11.941,28.877l-11.941-11.942l5.695-5.696l6.246,6.246l14.364-14.364L32,8.818"/></svg>');
+
+}
+input[type="checkbox"]:hover {
+  background-color: var(--checkbox-hover-color);
+  outline: 6px solid var(--checkbox-hover-color);
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
 
 .all-to-dos {
   list-style-type: none;
