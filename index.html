@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <header>
+      <button class="hamburger">&#9776;</button>
+    </header>
+    <aside>
+      <button class="x-button" id="close-sidebar-button">&#10005;</button>
+      <div id="sidebar-content">
+        <div id="sidebar-content-top">
+          <button class="to-do-group-button">All tasks</button>
+          <button class="to-do-group-button">Today</button>
+          <button class="to-do-group-button">Scheduled</button>
+          <button class="to-do-group-button">Completed</button>
+        </div>
+        <div id="to-do-projects-section">
+          <div id="projects-header">
+            <h3>Projects</h3>
+            <dialog id="new-project-form">
+              <form method="dialog" id="new-project-form-data">
+                <div class="task-form-header">
+                  <h2>New Project</h2>
+                  <button class="x-button" id="cancel-new-project-form">
+                    &#10005;
+                  </button>
+                </div>
+                <label for="projName">Name:</label>
+                <input
+                  type="text"
+                  name="projName"
+                  id="projName"
+                  placeholder="To-Do List"
+                  required
+                />
+                <button type="submit" id="confirm-new-project-form">
+                  Confirm
+                </button>
+              </form>
+            </dialog>
+            <button id="show-new-project-form">&plus; New project</button>
+          </div>
+          <hr />
+          <div id="all-projects"></div>
+        </div>
+      </div>
+    </aside>
+    <main>
+      <h2 id="todo-section-title">All tasks</h2>
+      <h1 class="welcome-text">Welcome back...</h1>
+      <h3 class="date"></h3>
+      <ul class="all-to-dos"></ul>
+      <dialog id="new-task-form">
+        <form method="dialog" id="new-task-form-data">
+          <div class="task-form-header">
+            <h2>New Task</h2>
+            <button class="x-button" id="cancel-new-task-form">&#10005;</button>
+          </div>
+          <label for="title">Title:</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Finsh homework"
+            required
+          />
+
+          <label for="due-date">Due Date:</label>
+          <input type="date" name="due-date" id="due-date" />
+
+          <label for="priority">Priority:</label>
+          <select name="priority" id="priority">
+            <option value=""></option>
+            <option value="high-priority">High</option>
+            <option value="medium-priority">Medium</option>
+            <option value="low-priority">Low</option>
+          </select>
+
+          <label for="description">Description:</label>
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="10"
+          ></textarea>
+
+          <button type="submit" id="confirm-new-task-form">Confirm</button>
+        </form>
+      </dialog>
+      <button id="show-new-task-form">Add Task</button>
+    </main>
+  </body>
+</html>
