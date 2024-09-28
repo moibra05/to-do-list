@@ -50,6 +50,8 @@ export const mainPage = (function (){
     refershToDos();
     if(toDoSections.allSections[section] === undefined){
       // Checks toDo category within the projects
+      let allToDos = JSON.parse(localStorage.getItem("allToDos"));
+      toDoSections.allSections = allToDos;
       const targetSection = toDoSections.allSections["projects"][section];
       for(const task of targetSection.tasks){
         toDoHandler.appendToDoNode(task);

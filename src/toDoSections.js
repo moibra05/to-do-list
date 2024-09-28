@@ -21,13 +21,18 @@ export const toDoSections = (function () {
     }
   }
 
-  const allSections = {
+  let allSections = {
     "All tasks": [], 
     "Today": [], 
     "Scheduled": [],
     "Completed": [], 
     projects: {}
   };
+
+  if(localStorage.getItem("allToDos")){
+    allSections = JSON.parse(localStorage.getItem("allToDos"));
+  }
+
 
   function createProjectDOM(name) {
     const newProjectButton = DOMModule.createNode("button");
@@ -40,6 +45,7 @@ export const toDoSections = (function () {
   function createProject(name){
     allSections.projects[name] = taskGroupConstructor(name);
     createProjectDOM(name);
+    localStorage.setItem("allToDos", JSON.stringify(allSections));
   }
   function getTaskGroup() {
     return currentTaskGroup

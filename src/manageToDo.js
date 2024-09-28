@@ -8,6 +8,18 @@ import { dialogHandler } from "./dialogHandler";
 const toDoHandler = (function () {
   dialogHandler.initEventHandlers("new-task-form", newTaskConfirm);
 
+  function loadToDos() {
+    let allToDos = JSON.parse(localStorage.getItem("allToDos"));
+    toDoSections.allSections = allToDos;
+
+    for(const task of toDoSections.allSections["All tasks"]){
+      appendToDoNode(task);
+    }
+    for(const project in toDoSections.allSections["projects"]){ 
+      toDoSections.createProject(project);
+    }
+  }
+
   function newTaskConfirm(formData) {
     const newToDoObj = Object.fromEntries(formData.entries());
     const newToDo = toDo(newToDoObj["title"], newToDoObj["description"], newToDoObj["due-date"], newToDoObj["priority"]);
@@ -153,6 +165,7 @@ const toDoHandler = (function () {
         projectToDos.push(toDoObj); 
       }
     }
+    localStorage.setItem("allToDos", JSON.stringify(toDoSections.allSections));
   }
 
   function removeFromCategories(toDoObj, categories) {
@@ -172,8 +185,9 @@ const toDoHandler = (function () {
         const sectionIndex = taskGroup.indexOf(toDoObj);
         taskGroup.splice(sectionIndex, 1);
       }
-
     }
+    localStorage.setItem("allToDos", JSON.stringify(toDoSections.allSections));
+
   }
 
   // Creates click handler for all to-dos
@@ -191,6 +205,7 @@ const toDoHandler = (function () {
   }
 
   return {
+    loadToDos,
     toDo,
     appendToDoNode,
   }

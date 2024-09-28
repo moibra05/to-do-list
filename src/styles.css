@@ -50,7 +50,7 @@ header {
   margin: 10px 0px;
   background-color: var(--primary-colour);
   border-radius: 10px;
-  border-left: 8px solid;
+  border-left: 8px solid black;
   color: white;
 }
 .high-priority {
@@ -175,11 +175,11 @@ textarea {
 
 
 aside {
-  position: absolute;
+  position: fixed;
+  top: 0;
   background-color: var(--primary-colour);
   height: 100vh;
   width: 290px;
-  top: 0;
   transform: translateX(-290px);
   z-index: 2;
   transition: 350ms;
@@ -297,8 +297,9 @@ aside {
     grid-area: header;
   }
   aside {
-    position: static;
-    height: unset;
+    position: sticky;
+    height: 100vh;
+    top: 0;
     width: unset;
     transform: translateX(0);
     grid-area: sidebar;
