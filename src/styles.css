@@ -1,7 +1,8 @@
 :root {
-  --primary-colour: lightgray;
-  --checkbox-border-color: #646464;
-  --checkbox-checked-color: #274c77;
+  --primary-colour: rgb(1, 121, 185);
+  --secondary-color: rgb(1, 91, 139); 
+  --checkbox-border-color: #dbd9d9;
+  --checkbox-checked-color: #e1e1e1;
   --checkbox-hover-color: #add5f6;
 }
 * {
@@ -9,6 +10,9 @@
   padding: 0;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+body {
+  background-color: #faf9f8;
 }
 main {
   margin: 25px auto;
@@ -18,7 +22,6 @@ main {
 button {
   padding: 10px 15px;
 }
-
 hr {
   margin-bottom: 10px;
 }
@@ -26,11 +29,12 @@ h1 {
   font-size: 2.5rem;
 }
 
-
 header {
   width: 100vw;
   min-height: 60px;
   background-color: var(--primary-colour);
+  color: white;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.176);
 }
 .date {
   margin-bottom: 10px;
@@ -47,6 +51,7 @@ header {
   background-color: var(--primary-colour);
   border-radius: 10px;
   border-left: 8px solid;
+  color: white;
 }
 .high-priority {
   border-left: 8px solid red;
@@ -93,7 +98,7 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked {
   background-size: cover;
   border-color: var(--checkbox-checked-color);
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 32 32" xml:space="preserve"><path style="fill: %23274c77" d="M11.941,28.877l-11.941-11.942l5.695-5.696l6.246,6.246l14.364-14.364L32,8.818"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 32 32" xml:space="preserve"><path style="fill: %23dbd9d9" d="M11.941,28.877l-11.941-11.942l5.695-5.696l6.246,6.246l14.364-14.364L32,8.818"/></svg>');
 }
 .delete-to-do {
   background-image: url('data:image/svg+xml,%3Csvg fill%3D%22%23000000%22 version%3D%221.1%22 xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 485 485%22%3E%3Cg%3E%3Crect x%3D%2267.224%22 width%3D%22350.535%22 height%3D%2271.81%22/%3E%3Cpath d%3D%22M417.776%2C92.829H67.237V485h350.537V92.829H417.776z M165.402%2C431.447h-28.362V146.383h28.362V431.447z M256.689%2C431.447 h-28.363V146.383h28.363V431.447z M347.97%2C431.447h-28.361V146.383h28.361V431.447z%22/%3E%3C/g%3E%3C/svg%3E');
@@ -116,6 +121,8 @@ input[type="checkbox"]:checked {
   font-weight: bold;
   transition: 300ms;
   width: 100%;
+  color: white;
+  background-color: rgb(1, 91, 139);
 }
 
 /* New Task Dialog */
@@ -176,6 +183,7 @@ aside {
   transform: translateX(-290px);
   z-index: 2;
   transition: 350ms;
+  color: white;
 }
 #close-sidebar-button {
   position: absolute;
@@ -203,6 +211,8 @@ aside {
   border-radius: 5px;
   font-size: 1.1rem;
   transition: 300ms;
+  background-color: var(--secondary-color);
+  color: white;
 }
 
 
@@ -219,6 +229,8 @@ aside {
   border-radius: 5px;
   border: none;
   transition: 300ms;
+  background-color: var(--secondary-color);
+  color: white;
 }
 
 #todo-section-title {
@@ -254,6 +266,7 @@ aside {
   }
   .to-do-group-button:hover {
     background-color: gray;
+    color: white;
   }
   button:hover {
     cursor: pointer;
