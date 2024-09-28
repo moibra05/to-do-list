@@ -14,13 +14,14 @@ const toDoHandler = (function () {
     appendToDoNode(newToDo);
   }
 
-  function toDo(title, description, dueDate, priority, isCompleted = false) {
+  function toDo(title, description, dueDate, priority, isCompleted = false, categories = []) {
     return {
       title, 
       description, 
       dueDate, 
       priority,
       isCompleted,
+      categories,
       id: Date.now(),
     }
   }
@@ -30,6 +31,8 @@ const toDoHandler = (function () {
     const toDoNode = DOMModule.createNode("li");
     const toDoTitle = DOMModule.createNode("h2");
     const toDoTextContainer = DOMModule.createNode("div");
+    const toDoButtonContainer = DOMModule.createNode("div");
+    const trashButton = DOMModule.createNode("button");
     const infoButton = DOMModule.createNode("button");
     const toDoDescription = DOMModule.createNode("p");
     const toDoDueDate = DOMModule.createNode("p");
@@ -40,9 +43,12 @@ const toDoHandler = (function () {
 
     DOMModule.toggleClass(toDoNode, "to-do");
     DOMModule.toggleClass(infoButton, "show-task-info");
+    DOMModule.toggleClass(trashButton, "delete-to-do");
+    DOMModule.toggleClass(toDoButtonContainer, "to-do-buttons");
     DOMModule.setAttribute(toDoCheckbox, "type", "checkbox");
-    DOMModule.setAttribute(toDoCheckbox, "id", `${toDoInstance.id}-checkbox`)
-    DOMModule.setAttribute(infoButton, "id", `show-task-${toDoInstance.id}-info`)
+    DOMModule.setAttribute(toDoCheckbox, "id", `${toDoInstance.id}-checkbox`);
+    DOMModule.setAttribute(trashButton, "id", `${toDoInstance.id}-trash`);
+    DOMModule.setAttribute(infoButton, "id", `show-task-${toDoInstance.id}-info`);
 
     DOMModule.updateTextContent(toDoTitle, toDoInstance.title);
     DOMModule.updateTextContent(toDoDescription, toDoInstance.description);
@@ -52,15 +58,19 @@ const toDoHandler = (function () {
     DOMModule.appendChild(toDoTextContainer, toDoTitle);
     DOMModule.appendChild(toDoTextContainer, toDoDescription);
     DOMModule.appendChild(toDoTextContainer, toDoDueDate);
+    DOMModule.appendChild(toDoButtonContainer, trashButton);
+    DOMModule.appendChild(toDoButtonContainer, infoButton);
+
     DOMModule.appendChild(toDoNode, toDoCheckbox);
     DOMModule.appendChild(toDoNode, toDoTextContainer);
-    DOMModule.appendChild(toDoNode, infoButton);
+    DOMModule.appendChild(toDoNode, toDoButtonContainer);
 
     if(priority != "")
       DOMModule.toggleClass(toDoNode, toDoInstance.priority);
 
     return toDoNode;
   }
+
 
   function createToDoInfoDialog(container, toDoInstance) {
     const taskInfoDialogHeader = DOMModule.createNode("div");
@@ -93,43 +103,76 @@ const toDoHandler = (function () {
   }
 
 
-  function markTaskCompleted(target) {
-    const id = parseInt(target.id);
-    const targetObj = toDoSections.allSections["All tasks"]["tasks"].filter((obj) => { return obj.id == id })[0];
-    targetObj.isCompleted = !targetObj.isCompleted
-    console.log(targetObj);
-    addToCategories(targetObj);
+  function markTaskCompleted(checkbox, id) {
+    const targetObj = toDoSections.allSections["All tasks"].filter((obj) => { return obj.id == id })[0];
+    if(checkbox.checked){
+      targetObj.isCompleted = true;
+      console.log("checked");
+      addToCategories(targetObj);
+    }
+    else{
+      targetObj.isCompleted = false;
+      console.log("unchecked");
+      removeFromCategories(targetObj, ["Completed"]);
+    }
+  }
+
+  function deleteToDoNode(target, id) {
+    const targetObj = toDoSections.allSections["All tasks"].filter((obj) => { return obj.id == id })[0];
+    removeFromCategories(targetObj, targetObj.categories);
+    DOMModule.remove(target);
   }
 
   function addToCategories(toDoObj) {
-    const allToDos = toDoSections.allSections["All tasks"].tasks;
-    const scheduledToDos = toDoSections.allSections["Scheduled"].tasks;
-    const todayToDos = toDoSections.allSections["Today"].tasks;
-    const completedToDos = toDoSections.allSections["Completed"].tasks;
-    let currentTaskGroup = toDoSections.getTaskGroup();
-
+    const allToDos = toDoSections.allSections["All tasks"];
+    const scheduledToDos = toDoSections.allSections["Scheduled"];
+    const todayToDos = toDoSections.allSections["Today"];
+    const completedToDos = toDoSections.allSections["Completed"];
+    const currentTaskGroup = toDoSections.getTaskGroup();
 
     if(!allToDos.includes(toDoObj)){
+      toDoObj.categories.push("All tasks");
       allToDos.push(toDoObj);
     }
     if(!scheduledToDos.includes(toDoObj) && toDoObj.dueDate){
+      toDoObj.categories.push("Scheduled");
       scheduledToDos.push(toDoObj);
     }
     if(!todayToDos.includes(toDoObj) && isToday(new Date(toDoObj.dueDate.replace(/-/g, '\/').replace(/T.+/, '')))){
+      toDoObj.categories.push("Today");
       todayToDos.push(toDoObj);
     }
     if(!completedToDos.includes(toDoObj) && toDoObj.isCompleted){
+      toDoObj.categories.push("Completed");
       completedToDos.push(toDoObj);
-    }
-    if(completedToDos.includes(toDoObj) && !toDoObj.isCompleted){
-      const index = completedToDos.indexOf(toDoObj);
-      completedToDos.splice(index, 1);
     }
     if(currentTaskGroup != "All tasks"){
       const projectToDos = toDoSections.allSections["projects"][currentTaskGroup].tasks;
       if(!projectToDos.includes(toDoObj)){
+        toDoObj.categories.push(currentTaskGroup);
         projectToDos.push(toDoObj); 
       }
+    }
+  }
+
+  function removeFromCategories(toDoObj, categories) {
+    const clonedCategories = [...categories];
+    for(const category of clonedCategories) {
+      const taskGroup = toDoSections.allSections[category];
+      const localIndex = toDoObj.categories.indexOf(category);
+      toDoObj.categories.splice(localIndex, 1);
+
+      // Removes the task from either a project or the main sections
+      if(taskGroup == undefined){
+        const projectGroup = toDoSections.allSections["projects"][category].tasks;
+        const projectIndex = projectGroup.indexOf(toDoObj);
+        projectGroup.splice(projectIndex, 1);
+      }
+      else{
+        const sectionIndex = taskGroup.indexOf(toDoObj);
+        taskGroup.splice(sectionIndex, 1);
+      }
+
     }
   }
 
@@ -138,8 +181,12 @@ const toDoHandler = (function () {
   DOMModule.addEventListener(allToDos, "click", (e) => handleTaskClicks(e));
   
   function handleTaskClicks(event) {
+    const id = parseInt(event.target.id);
     if(event.target.type === "checkbox"){
-      markTaskCompleted(event.target);
+      markTaskCompleted(event.target, id);
+    }
+    else if(event.target.classList.contains("delete-to-do")){
+      deleteToDoNode(event.target.parentElement.parentElement, id);
     }
   }
 

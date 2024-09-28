@@ -1,6 +1,5 @@
 :root {
   --primary-colour: lightgray;
-
   --checkbox-border-color: #646464;
   --checkbox-checked-color: #274c77;
   --checkbox-hover-color: #add5f6;
@@ -19,9 +18,7 @@ main {
 button {
   padding: 10px 15px;
 }
-button:hover {
-  cursor: pointer;
-}
+
 hr {
   margin-bottom: 10px;
 }
@@ -73,13 +70,14 @@ header {
   height: 30px;
   color: white;
   background-color: #2a75bc;
-  margin: auto 0 auto auto;
   transition: 80ms;
 }
-.show-task-info:hover {
-  outline: 2.5px solid white;
+.to-do-buttons {
+  display: flex;
+  margin: auto 0 auto auto;
+  align-items: center;
+  gap: 20px;
 }
-
 input[type="checkbox"] {
   box-sizing: border-box;
   width: 20px;
@@ -96,15 +94,16 @@ input[type="checkbox"]:checked {
   background-size: cover;
   border-color: var(--checkbox-checked-color);
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 32 32" xml:space="preserve"><path style="fill: %23274c77" d="M11.941,28.877l-11.941-11.942l5.695-5.696l6.246,6.246l14.364-14.364L32,8.818"/></svg>');
-
 }
-input[type="checkbox"]:hover {
-  background-color: var(--checkbox-hover-color);
-  outline: 6px solid var(--checkbox-hover-color);
-  transform: scale(1.05);
-  cursor: pointer;
+.delete-to-do {
+  background-image: url('data:image/svg+xml,%3Csvg fill%3D%22%23000000%22 version%3D%221.1%22 xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 485 485%22%3E%3Cg%3E%3Crect x%3D%2267.224%22 width%3D%22350.535%22 height%3D%2271.81%22/%3E%3Cpath d%3D%22M417.776%2C92.829H67.237V485h350.537V92.829H417.776z M165.402%2C431.447h-28.362V146.383h28.362V431.447z M256.689%2C431.447 h-28.363V146.383h28.363V431.447z M347.97%2C431.447h-28.361V146.383h28.361V431.447z%22/%3E%3C/g%3E%3C/svg%3E');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 13px;
+  background-color: transparent;
+  border: none;
 }
-
 
 .all-to-dos {
   list-style-type: none;
@@ -146,9 +145,7 @@ form {
   transition: 200ms;
   font-weight: 900;
 }
-.x-button:hover {
-  color: rgb(209, 0, 0);
-}
+
 
 input, textarea, select{
   padding: 8px 12px;
@@ -168,9 +165,7 @@ textarea {
   z-index: 1;
 }
 
-.hamburger:hover {
-  scale: 1.1;
-}
+
 
 aside {
   position: absolute;
@@ -209,9 +204,7 @@ aside {
   font-size: 1.1rem;
   transition: 300ms;
 }
-.to-do-group-button:hover {
-  background-color: gray;
-}
+
 
 /* Projects Styles */
 #projects-header {
@@ -227,10 +220,7 @@ aside {
   border: none;
   transition: 300ms;
 }
-#show-new-project-form:hover, #show-new-task-form:hover {
-  background-color: rgb(14, 141, 19);
-  color: white;
-}
+
 #todo-section-title {
   margin: 10px 0px;
   font-size: 2rem;
@@ -245,6 +235,34 @@ aside {
   box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.552);
 }
 
+
+@media (hover: hover){
+  .show-task-info:hover {
+    outline: 2.5px solid white;
+  }
+  input[type="checkbox"]:hover {
+    background-color: var(--checkbox-hover-color);
+    outline: 6px solid var(--checkbox-hover-color);
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  .x-button:hover {
+    color: rgb(209, 0, 0);
+  }
+  .hamburger:hover {
+    scale: 1.1;
+  }
+  .to-do-group-button:hover {
+    background-color: gray;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+  #show-new-project-form:hover, #show-new-task-form:hover {
+    background-color: rgb(14, 141, 19);
+    color: white;
+  }
+}
 
 @media screen and (min-width: 1600px) {
   body {

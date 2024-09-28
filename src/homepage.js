@@ -50,14 +50,18 @@ export const mainPage = (function (){
     refershToDos();
     if(toDoSections.allSections[section] === undefined){
       // Checks toDo category within the projects
-      var targetSection = toDoSections.allSections["projects"][section];
+      const targetSection = toDoSections.allSections["projects"][section];
+      for(const task of targetSection.tasks){
+        toDoHandler.appendToDoNode(task);
+      }
     }
     else {
-      var targetSection = toDoSections.allSections[section];
+      const targetSection = toDoSections.allSections[section];
+      for(const task of targetSection){
+        toDoHandler.appendToDoNode(task);
+      }
     }
-    for(const task of targetSection.tasks){
-      toDoHandler.appendToDoNode(task);
-    }
+
   }
 
   return {

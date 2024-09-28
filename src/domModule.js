@@ -29,6 +29,10 @@ const DOMModule = (function () {
     node.setAttribute(attribute, value);
   }
 
+  function remove(node){
+    node.remove();
+  }
+
   function deleteAllChildren(parent){
     const element = querySelector(parent);
     while(element.firstChild) {
@@ -44,7 +48,8 @@ const DOMModule = (function () {
     toggleClass,
     addEventListener,
     setAttribute,
-    deleteAllChildren
+    remove,
+    deleteAllChildren,
   }
 })();
 

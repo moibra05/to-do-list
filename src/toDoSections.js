@@ -22,10 +22,10 @@ export const toDoSections = (function () {
   }
 
   const allSections = {
-    "All tasks": taskGroupConstructor("All tasks"), 
-    "Today": taskGroupConstructor("Today"), 
-    "Scheduled": taskGroupConstructor("Scheduled"),
-    "Completed": taskGroupConstructor("Completed"), 
+    "All tasks": [], 
+    "Today": [], 
+    "Scheduled": [],
+    "Completed": [], 
     projects: {}
   };
 
